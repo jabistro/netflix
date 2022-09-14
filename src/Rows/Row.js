@@ -48,14 +48,14 @@ const Row = ({ title, fetchUrl, isLargeRow }) => {
         <div className="row-wrap">
             <h2 className="row-title">{title}</h2>
             <div className="row-posters">
-                {movies.map(movie => {
+                {movies?.map(movie => {
                     return (
                         <img
                             className={`row-poster ${isLargeRow && "row-posterLarge"}`}
-                            alt={movie.name}
+                            alt={movie?.name}
                             onClick={() => handleClick(movie)}
-                            src={`${base_url}${isLargeRow ? movie.poster_path : movie.backdrop_path}`}
-                            key={movie.id}
+                            src={`${base_url}${isLargeRow ? movie?.poster_path : movie?.backdrop_path}`}
+                            key={movie?.id}
                         />
                     )
                 })}
