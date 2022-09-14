@@ -1,13 +1,41 @@
 import "./Row.css";
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react';
+import axios from '../axios';
 
-const Row = ({ title }) => {
+const base_url = 'https://image.tmdb.org/t/p/original/';
+
+const Row = ({ title, fetchUrl }) => {
     const [movies, setMovies] = useState([]);
 
-    return (
-        <div>
-            <h2>{title}</h2>
+    // A snippet of code which runs based on a specific condition/variable
+    useEffect(() => {
+        // if dependency arr blank, run once when the row loads, and don't run again
+        async function fetchData() {
+            const request = await axios.get(fetchUrl);
+            // console.log(request);
+            setMovies(request.data.results);
+            return request;
+        }
+        fetchData();
+    }, [fetchUrl]);
 
+    console.log(movies)
+
+    return (
+        <div className="row-wrap">
+            <h2 className="row-title">{title}</h2>
+            <div className="row-posters">
+                {movies.map(movie => {
+                    return (
+                        <img
+                        className="row-poster"
+                        alt={movie.name}
+                        src={`${base_url}${movie.poster_path}`}
+                        key={movie.id}
+                        />
+                    )
+                })}
+            </div>
         </div>
     )
 }
