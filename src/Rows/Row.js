@@ -4,7 +4,7 @@ import axios from '../axios';
 
 const base_url = 'https://image.tmdb.org/t/p/original/';
 
-const Row = ({ title, fetchUrl }) => {
+const Row = ({ title, fetchUrl, isLargeRow }) => {
     const [movies, setMovies] = useState([]);
 
     // A snippet of code which runs based on a specific condition/variable
@@ -28,9 +28,9 @@ const Row = ({ title, fetchUrl }) => {
                 {movies.map(movie => {
                     return (
                         <img
-                        className="row-poster"
+                        className={`row-poster ${isLargeRow && "row-posterLarge"}`}
                         alt={movie.name}
-                        src={`${base_url}${movie.poster_path}`}
+                        src={`${base_url}${isLargeRow ? movie.poster_path : movie.backdrop_path}`}
                         key={movie.id}
                         />
                     )
