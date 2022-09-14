@@ -12,7 +12,6 @@ const Row = ({ title, fetchUrl, isLargeRow }) => {
         // if dependency arr blank, run once when the row loads, and don't run again
         async function fetchData() {
             const request = await axios.get(fetchUrl);
-            // console.log(request);
             setMovies(request.data.results);
             return request;
         }
@@ -28,10 +27,10 @@ const Row = ({ title, fetchUrl, isLargeRow }) => {
                 {movies.map(movie => {
                     return (
                         <img
-                        className={`row-poster ${isLargeRow && "row-posterLarge"}`}
-                        alt={movie.name}
-                        src={`${base_url}${isLargeRow ? movie.poster_path : movie.backdrop_path}`}
-                        key={movie.id}
+                            className={`row-poster ${isLargeRow && "row-posterLarge"}`}
+                            alt={movie.name}
+                            src={`${base_url}${isLargeRow ? movie.poster_path : movie.backdrop_path}`}
+                            key={movie.id}
                         />
                     )
                 })}
